@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="gifstyle.css">
+</head>
+
+<body>
+
+    <section>
+        <h1 style=" font-family: 'Luckiest Guy', cursive;">Search GIFs across giphy.</h1>
+        <div class="centerDiv">
+            <div class="details">
+                <label>Kindly refresh the page after each search.</label><br>
+                <input type="text" name="" placeholder="Search..." id="nameid">
+            </div><br>
+
+            <button onclick="getData()"> Click Me</button>
+            <div class="inner"></div>
+
+        </div>
+    </section>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+    </script>
+    <script>
+        function getData() {
+            var input = $("#nameid").val()
+            var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=" + input + "+&api_key=bmQsdyJBSZWHYGIykgAkpmCHZVkbb1Bd&limit=3");
+            xhr.done(function(response) {
+                console.log("success got data", response);
+                var jiff = response.data
+                for (const i in jiff) {
+                    $('.inner').append("<img src='" + jiff[i].images.original.url + "' style ='height:260px; width:260px;'/>")
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>
